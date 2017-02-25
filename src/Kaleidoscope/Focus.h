@@ -53,9 +53,15 @@ extern KaleidoscopePlugins::Focus Focus;
 
 namespace FocusCommands {
   bool help (const char *command);
+  bool version (const char *command);
 };
 
 #define FOCUS_CMD_HELP FOCUS_COMMAND(FocusCommands::help, \
                                      "help\n"             \
                                      "----\n"             \
                                      "This screen.")
+
+#define FOCUS_CMD_VERSION FOCUS_COMMAND(FocusCommands::version,         \
+                                        "version\n"                     \
+                                        "-------\n"                     \
+                                        "Print the running firmware version.")

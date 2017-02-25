@@ -93,4 +93,26 @@ namespace FocusCommands {
 
     return true;
   }
+
+  bool version (const char *command) {
+    if (strcmp_P (command, PSTR ("version")) != 0)
+      return false;
+
+    Serial.print (F("Kaleidoscope/"));
+    Serial.print (F(VERSION));
+    Serial.print (F(", for "));
+    Serial.print (F(USB_MANUFACTURER));
+    Serial.print (F(" "));
+    Serial.print (F(USB_PRODUCT));
+    Serial.print (F(", compiled on "));
+    Serial.print (F(__DATE__));
+    Serial.print (F(" at "));
+    Serial.print (F(__TIME__));
+    Serial.print (F(" (Arduino "));
+    Serial.print (ARDUINO);
+    Serial.println (F(")"));
+
+    return true;
+  }
+
 }

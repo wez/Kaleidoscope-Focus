@@ -90,6 +90,8 @@ void setup () {
                                    "setLED index r g b\n"
                                    "------------------\n"
                                    "Set the LED at `index` to the color represented by `r`, `g`, and `b`."));
+  Focus.addCommand (FOCUS_CMD_HELP);
+  Focus.addCommand (FOCUS_CMD_VERSION);
 }
 
 void loop () {
