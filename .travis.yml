@@ -10,6 +10,7 @@ before_install:
   - popd
 install:
   - git clone --recurse-submodules https://github.com/keyboardio/Arduino-Boards hardware/keyboardio/avr
+  - ln -s $(pwd) hardware/keyboardio/avr/libraries/Kaleidoscope-Focus
 script:
   - export DEFAULT_SKETCH=$(cd examples; basename *)
   - export ARDUINO_PATH=$(pwd)/../arduino-1.6.11
