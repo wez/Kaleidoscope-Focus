@@ -52,7 +52,7 @@ namespace KaleidoscopePlugins {
 
 extern KaleidoscopePlugins::Focus Focus;
 
-#define FOCUS_CMD_HELP FOCUS_COMMAND(help, "This screen.")
+#define FOCUS_CMD_HELP FOCUS_COMMAND(help, "[help]\n\nThis screen.")
 
 namespace FocusCommands {
   bool help (const char *command);
