@@ -86,7 +86,10 @@ void setup () {
 
   USE_PLUGINS (&Focus, &LEDControl);
 
-  Focus.addCommand (FOCUS_COMMAND (setLED, "[setLED index r g b]\nfoobar"));
+  Focus.addCommand (FOCUS_COMMAND (FocusCommands::setLED,
+                                   "setLED index r g b\n"
+                                   "------------------\n"
+                                   "Set the LED at `index` to the color represented by `r`, `g`, and `b`."));
 }
 
 void loop () {

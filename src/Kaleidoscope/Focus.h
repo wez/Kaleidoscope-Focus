@@ -20,7 +20,7 @@
 
 #define FOCUS_COMMAND(n, d) ({                        \
     static KaleidoscopePlugins::Focus::Command _c = { \
-      &(FocusCommands::n), F(#n), F(d), NULL};        \
+      &n, F(d), NULL};                                \
     &_c;                                              \
     })
 
@@ -30,7 +30,6 @@ namespace KaleidoscopePlugins {
     typedef bool (*commandHandler) (const char *command);
     typedef struct Command {
       commandHandler handler;
-      const __FlashStringHelper *name;
       const __FlashStringHelper *docs;
       Command *next;
     } Command;
@@ -52,8 +51,11 @@ namespace KaleidoscopePlugins {
 
 extern KaleidoscopePlugins::Focus Focus;
 
-#define FOCUS_CMD_HELP FOCUS_COMMAND(help, "[help]\n\nThis screen.")
-
 namespace FocusCommands {
   bool help (const char *command);
 };
+
+#define FOCUS_CMD_HELP FOCUS_COMMAND(FocusCommands::help, \
+                                     "help\n"             \
+                                     "----\n"             \
+                                     "This screen.")

@@ -87,12 +87,6 @@ namespace FocusCommands {
                       "===================\n"));
 
     for (const KaleidoscopePlugins::Focus::Command *node = rootCommand; node; node = node->next) {
-      Serial.println (node->name);
-      uint8_t l = strlen_P ((const char *)node->name);
-      for (uint8_t i = 0; i < l; i++) {
-        Serial.print (F("-"));
-      }
-      Serial.println ();
       Serial.println (node->docs);
       Serial.println ();
     }
