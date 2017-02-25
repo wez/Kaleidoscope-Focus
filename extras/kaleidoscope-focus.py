@@ -39,7 +39,12 @@ class Commander (object):
             ser.write (cmd)
             ser.write ("\n")
             while True:
-                resultLine = ser.readline ().strip ()
+                resultLine = ser.readline ()
+
+                if resultLine == "\r\n" or resultLine == "\n":
+                    resultLine = " "
+                else:
+                    resultLine = resultLine.rstrip ()
 
                 if resultLine == ".":
                     break
