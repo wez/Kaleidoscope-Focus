@@ -41,15 +41,34 @@ void setup () {
 
 ## Plugin methods
 
-The plugin provides the `Focus` object, which has the following methods:
+The plugin provides the `Focus` object, which has the following method:
 
 ### `.addHook(FOCUS_HOOK (function, documentation))`
 
-> TODO
+> Adds a new hook to `Focus`. Hooks are called in order of registration, and
+> they get the parsed command name as argument. If they handle the command, they
+> shall return `true`, otherwise `false`. Once a command has been handled, it
+> will not be given to other hooks.
+>
+> The hook function is responsible for reading the rest of the command, in
+> whatever way it sees fit.
+>
+> The `documentation` argument is a string, used by the `help` command, and can
+> be left empty, if no documentation is desired for the `function`.
 
-### `.getRootNode()`
+## Focus commands
 
-> TODO
+The plugin ships with two (optional) commands:
+
+### `FOCUS_HOOK_VERSION`
+
+> A hook, that when called via the `version` command, prints the version of the
+> firmware, the keyboard vendor & product, compile date, and Arduino version.
+
+### `FOCUS_HOOK_HELP`
+
+> A hook, that when called via the `help` command, walks through the registered
+> hooks, and prints their documentation.
 
 ## Further reading
 
