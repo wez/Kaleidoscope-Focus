@@ -18,11 +18,19 @@
 
 #include <Kaleidoscope.h>
 
+#if FOCUS_WITHOUT_DOCS
 #define FOCUS_COMMAND(n, d) ({                        \
     static KaleidoscopePlugins::Focus::Command _c = { \
-      &n, F(d), NULL};                                \
+      &n, NULL, NULL};                                \
     &_c;                                              \
     })
+#else
+#define FOCUS_COMMAND(n, d) ({                          \
+      static KaleidoscopePlugins::Focus::Command _c = { \
+        &n, F(d), NULL};                                \
+      &_c;                                              \
+    })
+#endif
 
 namespace KaleidoscopePlugins {
   class Focus : public KaleidoscopePlugin {

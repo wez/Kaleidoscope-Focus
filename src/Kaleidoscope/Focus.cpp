@@ -87,6 +87,9 @@ namespace FocusCommands {
                       "===================\n"));
 
     for (const KaleidoscopePlugins::Focus::Command *node = rootCommand; node; node = node->next) {
+      if (!node->docs)
+        continue;
+
       Serial.println (node->docs);
       Serial.println ();
     }
