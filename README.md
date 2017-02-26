@@ -9,30 +9,45 @@
  [st:broken]: https://img.shields.io/badge/broken-X-black.png?style=flat&colorA=e05d44&colorB=494e52
  [st:experimental]: https://img.shields.io/badge/experimental----black.png?style=flat&colorA=dfb317&colorB=494e52
 
-TODO
+Bidirectional communication for Kaleidoscope. With this plugin, one can expose a
+set of commands via the Serial port, and allow the host to talk with the
+keyboard - and vice versa. This plugin implements only the basic building
+blocks, a framework other plugins can opt-in to.
 
 ## Using the plugin
 
-TODO
+This plugin is **not** meant to be used by the end-user (apart from setting it
+up to use plugin-provided hooks), but by plugin authors instead. As an end user,
+please see the documentation of the plugins you use, for instructions on how to
+hook them up with `Focus`!
+
+Nevertheless, the basic commands we implement with this plugin alone, are usable
+like this:
 
 ```c++
 #include <Kaleidoscope.h>
 #include <Kaleidoscope-Focus.h>
 
 void setup () {
+  Serial.begin (9600);
   Kaleidoscope.setup ();
-  
+
   USE_PLUGINS (&Focus);
 
-  // TODO
+  Focus.addHook (FOCUS_HOOK_HELP);
+  Focus.addHook (FOCUS_HOOK_VERSION);
 }
 ```
 
 ## Plugin methods
 
-The plugin provides the `Focus` object, which has the following method:
+The plugin provides the `Focus` object, which has the following methods:
 
-### `.addCommand(command)`
+### `.addHook(FOCUS_HOOK (function, documentation))`
+
+> TODO
+
+### `.getRootNode()`
 
 > TODO
 
