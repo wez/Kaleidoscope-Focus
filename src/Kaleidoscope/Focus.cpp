@@ -21,7 +21,7 @@
 
 namespace KaleidoscopePlugins {
   char Focus::command[32];
-  Focus::Command *Focus::rootCommand;
+  Focus::HookNode *Focus::rootNode;
 
   Focus::Focus (void) {
   }
@@ -32,22 +32,22 @@ namespace KaleidoscopePlugins {
   }
 
   void
-  Focus::addCommand (Command *command) {
-    if (!rootCommand) {
-      rootCommand = command;
+  Focus::addHook (HookNode *newNode) {
+    if (!rootNode) {
+      rootNode = newNode;
     } else {
-      Command *currentCommand = rootCommand;
+      HookNode *node = rootNode;
 
-      while (currentCommand->next) {
-        currentCommand = currentCommand->next;
+      while (node->next) {
+        node = node->next;
       }
-      currentCommand->next = command;
+      node->next = newNode;
     }
   }
 
-  const Focus::Command *
-  Focus::getRootCommand (void) {
-    return rootCommand;
+  const Focus::HookNode *
+  Focus::getRootNode (void) {
+    return rootNode;
   }
 
   void
@@ -64,8 +64,8 @@ namespace KaleidoscopePlugins {
     } while (command[i - 1] != ' ' && command[i - 1] != '\n' && i < 32);
     command[i - 1] = '\0';
 
-    for (Command *cc = rootCommand; cc; cc = cc->next) {
-      if ((*cc->handler) (command)) {
+    for (HookNode *node = rootNode; node; node = node->next) {
+      if ((*node->handler) (command)) {
         break;
       }
     }
@@ -76,17 +76,17 @@ namespace KaleidoscopePlugins {
 
 KaleidoscopePlugins::Focus Focus;
 
-namespace FocusCommands {
+namespace FocusHooks {
   bool help (const char *command) {
     if (strcmp_P (command, PSTR("help")) != 0)
       return false;
 
-    const KaleidoscopePlugins::Focus::Command *rootCommand = Focus.getRootCommand ();
+    const KaleidoscopePlugins::Focus::HookNode *rootNode = Focus.getRootNode ();
 
     Serial.println (F("Available commands:\n"
                       "===================\n"));
 
-    for (const KaleidoscopePlugins::Focus::Command *node = rootCommand; node; node = node->next) {
+    for (const KaleidoscopePlugins::Focus::HookNode *node = rootNode; node; node = node->next) {
       if (!node->docs)
         continue;
 

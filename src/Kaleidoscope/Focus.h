@@ -19,38 +19,38 @@
 #include <Kaleidoscope.h>
 
 #if FOCUS_WITHOUT_DOCS
-#define FOCUS_COMMAND(n, d) ({                        \
-    static KaleidoscopePlugins::Focus::Command _c = { \
-      &n, NULL, NULL};                                \
-    &_c;                                              \
+#define FOCUS_HOOK(n, d) ({                               \
+      static KaleidoscopePlugins::Focus::HookNode _c = {  \
+        &n, NULL, NULL};                                  \
+      &_c;                                                \
     })
 #else
-#define FOCUS_COMMAND(n, d) ({                          \
-      static KaleidoscopePlugins::Focus::Command _c = { \
-        &n, F(d), NULL};                                \
-      &_c;                                              \
+#define FOCUS_HOOK(n, d) ({                               \
+      static KaleidoscopePlugins::Focus::HookNode _c = {  \
+        &n, F(d), NULL};                                  \
+      &_c;                                                \
     })
 #endif
 
 namespace KaleidoscopePlugins {
   class Focus : public KaleidoscopePlugin {
   public:
-    typedef bool (*commandHandler) (const char *command);
-    typedef struct Command {
-      commandHandler handler;
+    typedef bool (*Hook) (const char *command);
+    typedef struct HookNode {
+      Hook handler;
       const __FlashStringHelper *docs;
-      Command *next;
-    } Command;
+      HookNode *next;
+    } HookNode;
 
     Focus (void);
 
     virtual void begin (void) final;
 
-    static void addCommand (Command *command);
-    static const Command *getRootCommand (void);
+    static void addHook (HookNode *newNode);
+    static const HookNode *getRootNode (void);
 
   private:
-    static Command *rootCommand;
+    static HookNode *rootNode;
     static char command[32];
 
     static void loopHook (bool postClear);
@@ -59,17 +59,17 @@ namespace KaleidoscopePlugins {
 
 extern KaleidoscopePlugins::Focus Focus;
 
-namespace FocusCommands {
+namespace FocusHooks {
   bool help (const char *command);
   bool version (const char *command);
 };
 
-#define FOCUS_CMD_HELP FOCUS_COMMAND(FocusCommands::help, \
-                                     "help\n"             \
-                                     "----\n"             \
-                                     "This screen.")
+#define FOCUS_HOOK_HELP FOCUS_HOOK(FocusHooks::help,    \
+                                   "help\n"             \
+                                   "----\n"             \
+                                   "This screen.")
 
-#define FOCUS_CMD_VERSION FOCUS_COMMAND(FocusCommands::version,         \
-                                        "version\n"                     \
-                                        "-------\n"                     \
-                                        "Print the running firmware version.")
+#define FOCUS_HOOK_VERSION FOCUS_HOOK(FocusHooks::version,              \
+                                      "version\n"                       \
+                                      "-------\n"                       \
+                                      "Print the running firmware version.")
