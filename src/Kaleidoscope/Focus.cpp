@@ -107,10 +107,7 @@ namespace FocusHooks {
     Serial.print (F(", compiled on "));
     Serial.print (F(__DATE__));
     Serial.print (F(" at "));
-    Serial.print (F(__TIME__));
-    Serial.print (F(" (Arduino "));
-    Serial.print (ARDUINO);
-    Serial.println (F(")"));
+    Serial.println (F(__TIME__));
 
     return true;
   }
