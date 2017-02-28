@@ -83,9 +83,6 @@ namespace FocusHooks {
 
     const KaleidoscopePlugins::Focus::HookNode *rootNode = Focus.getRootNode ();
 
-    Serial.println (F("Available commands:\n"
-                      "===================\n"));
-
     for (const KaleidoscopePlugins::Focus::HookNode *node = rootNode; node; node = node->next) {
       if (!node->docs)
         continue;
