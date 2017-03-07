@@ -28,7 +28,7 @@ namespace KaleidoscopePlugins {
 
   void
   Focus::begin (void) {
-    Kaleidoscope.useLoopHook (loopHook);
+    loop_hook_use (loopHook);
   }
 
   void
