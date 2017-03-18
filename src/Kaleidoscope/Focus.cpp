@@ -61,8 +61,14 @@ namespace KaleidoscopePlugins {
     uint8_t i = 0;
     do {
       command[i++] = Serial.read ();
-    } while (command[i - 1] != ' ' && command[i - 1] != '\n' && i < 32);
-    command[i - 1] = '\0';
+
+      if (Serial.peek () == '\n')
+        break;
+    } while (command[i - 1] != ' ' && i < 32);
+    if (command[i - 1] == ' ')
+      command[i - 1] = '\0';
+    else
+      command[i] = '\0';
 
     for (HookNode *node = rootNode; node; node = node->next) {
       if ((*node->handler) (command)) {
