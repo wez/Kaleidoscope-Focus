@@ -78,6 +78,39 @@ namespace KaleidoscopePlugins {
 
     Serial.println (F("."));
   }
+
+  void
+  Focus::printSpace (void) {
+    Serial.print (F(" "));
+  }
+
+  void
+  Focus::printNumber (uint8_t num) {
+    if (num < 10)
+      printSpace ();
+    if (num < 100)
+      printSpace ();
+    Serial.print (num);
+  }
+
+  void
+  Focus::printColor (cRGB color) {
+    printNumber (color.r);
+    printSpace ();
+    printNumber (color.g);
+    printSpace ();
+    printNumber (color.b);
+  }
+
+  void
+  Focus::printSeparator (void) {
+    Serial.print (F(" | "));
+  }
+
+  void
+  Focus::printBool (bool b) {
+    Serial.print ((b) ? F("true") : F("false"));
+  }
 };
 
 KaleidoscopePlugins::Focus Focus;
@@ -108,7 +141,7 @@ namespace FocusHooks {
     Serial.print (F(VERSION));
     Serial.print (F(", for "));
     Serial.print (F(USB_MANUFACTURER));
-    Serial.print (F(" "));
+    Focus.printSpace ();
     Serial.print (F(USB_PRODUCT));
     Serial.print (F(", compiled on "));
     Serial.print (F(__DATE__));

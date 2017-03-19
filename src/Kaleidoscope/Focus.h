@@ -49,6 +49,13 @@ namespace KaleidoscopePlugins {
     static void addHook (HookNode *newNode);
     static const HookNode *getRootNode (void);
 
+    /* Helpers */
+    static void printNumber (uint8_t number);
+    static void printSpace (void);
+    static void printColor (cRGB color);
+    static void printSeparator (void);
+    static void printBool (bool b);
+
   private:
     static HookNode *rootNode;
     static char command[32];
