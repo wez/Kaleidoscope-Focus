@@ -77,6 +77,12 @@ namespace KaleidoscopePlugins {
     }
 
     Serial.println (F("."));
+
+    while (Serial.peek () != '\n') {
+      Serial.read ();
+    }
+    if (Serial.peek () == '\n')
+      Serial.read ();
   }
 
   void
