@@ -133,7 +133,6 @@ namespace FocusHooks {
         continue;
 
       Serial.println (node->docs);
-      Serial.println ();
     }
 
     return true;

@@ -71,12 +71,5 @@ namespace FocusHooks {
   bool version (const char *command);
 };
 
-#define FOCUS_HOOK_HELP FOCUS_HOOK(FocusHooks::help,    \
-                                   "help\n"             \
-                                   "----\n"             \
-                                   "This screen.")
-
-#define FOCUS_HOOK_VERSION FOCUS_HOOK(FocusHooks::version,              \
-                                      "version\n"                       \
-                                      "-------\n"                       \
-                                      "Print the running firmware version.")
+#define FOCUS_HOOK_HELP    FOCUS_HOOK(FocusHooks::help, "help")
+#define FOCUS_HOOK_VERSION FOCUS_HOOK(FocusHooks::version, "version")
