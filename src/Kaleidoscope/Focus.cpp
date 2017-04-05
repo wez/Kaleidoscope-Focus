@@ -91,11 +91,7 @@ namespace KaleidoscopePlugins {
   }
 
   void
-  Focus::printNumber (uint8_t num) {
-    if (num < 10)
-      printSpace ();
-    if (num < 100)
-      printSpace ();
+  Focus::printNumber (uint16_t num) {
     Serial.print (num);
   }
 

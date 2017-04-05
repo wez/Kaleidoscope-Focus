@@ -50,7 +50,7 @@ namespace KaleidoscopePlugins {
     static const HookNode *getRootNode (void);
 
     /* Helpers */
-    static void printNumber (uint8_t number);
+    static void printNumber (uint16_t number);
     static void printSpace (void);
     static void printColor (cRGB color);
     static void printSeparator (void);
