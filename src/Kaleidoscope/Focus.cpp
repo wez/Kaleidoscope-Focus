@@ -140,13 +140,13 @@ namespace FocusHooks {
 
     Serial.print (F("Kaleidoscope/"));
     Serial.print (F(VERSION));
-    Serial.print (F(", for "));
-    Serial.print (F(USB_MANUFACTURER));
     Focus.printSpace ();
+    Serial.print (F(USB_MANUFACTURER));
+    Serial.print (F("/"));
     Serial.print (F(USB_PRODUCT));
-    Serial.print (F(", compiled on "));
+    Focus.printSeparator ();
     Serial.print (F(__DATE__));
-    Serial.print (F(" at "));
+    Focus.printSpace ();
     Serial.println (F(__TIME__));
 
     return true;
