@@ -17,6 +17,7 @@
  */
 
 #include <Kaleidoscope.h>
+#include <cRGB.h>
 
 #if FOCUS_WITHOUT_DOCS
 #define FOCUS_HOOK(n, d) ({                               \
